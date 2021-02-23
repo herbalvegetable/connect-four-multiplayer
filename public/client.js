@@ -1,5 +1,6 @@
 //const url = 'http://localhost:5000/';
 const url = 'http://link-four.herokuapp.com/';
+
 const socket = io.connect(url);
 const ls = window.localStorage;
 class Client{
@@ -119,6 +120,7 @@ socket.on('joinGame', data=>{
 		else{
 			Game.clientTurn = 1;
 		}
+		Grid.init();
 	}
 });
 

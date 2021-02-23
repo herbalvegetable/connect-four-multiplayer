@@ -43,6 +43,10 @@ canvas.addEventListener('mouseup', e=>{
 		mouse.rightClick = false;
 	}
 });
+canvas.addEventListener('mouseleave', e=>{
+	mouse.down = false;
+	mouse.rightClick = false;
+});
 var bgColour = 'dodgerblue';
 let gridWindowImg = new Image();
 gridWindowImg.src = 'gridWindow.png';
@@ -173,6 +177,10 @@ class Grid{
 	}
 	static winnerList = [];
 	static init(){
+		Game.winner = null;
+		this.winnerList = [];
+		Chip.list = [];
+		this.list = [];
 		for (var i = 0; i < this.rows; i++) {
 			var row = [];
 			for (var j = 0; j < this.cols; j++) {
@@ -183,6 +191,7 @@ class Grid{
 			}
 			this.list.push(row);
 		}
+		console.log('init grid', Game.winner, this.winnerList);
 	}
 	static set(){
 		for (var i = 0; i < this.list.length; i++) {
@@ -248,6 +257,14 @@ class Grid{
 			}
 		}
 		return coords;
+	}
+	static clear(){
+		for (var i = 0; i < this.list.length; i++) {
+			for (var j = 0; j < this.list[i].length; j++) {//this.list[i][j]
+				var grid = this.list[i][j];
+				Chip.rmv(grid.chip);
+			}
+		}
 	}
 	constructor(x, y, options){
 		this.x = x;
@@ -438,6 +455,7 @@ class Chip{
 		let chip = new Chip(options);
 		this.list.push(new Chip(options));
 		options.grid.chip = chip;
+		console.log('add chip');
 	}
 	static rmv(chip){
 		chip.grid.chip = null;
@@ -510,15 +528,14 @@ class Chip{
 		}
 	}
 }
-Grid.init();
 
 function background(colour){
 	ctx.fillStyle = colour;
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 function loop(){
+	requestAnimationFrame(loop);
 	if(canvas.style.display != 'none'){
-		requestAnimationFrame(loop);
 		ctx.save();
 		background(bgColour);
 		Grid.create();
