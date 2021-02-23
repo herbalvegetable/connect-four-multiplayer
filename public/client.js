@@ -1,4 +1,5 @@
-const url = 'http://localhost:5000/';
+//const url = 'http://localhost:5000/';
+const url = 'https://link-four.herokuapp.com';
 const socket = io.connect(url);
 const ls = window.localStorage;
 class Client{
