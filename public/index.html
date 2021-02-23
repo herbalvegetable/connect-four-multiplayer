@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Connect Four Multiplayer</title>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap" rel="stylesheet">
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js'></script>
+	<style type="text/css">
+		body{
+			font-family:Helvetica;
+			background-color: dodgerblue;
+			text-align: center;
+		}
+		#header{
+			font-family: Gaegu;
+			font-size: 2em;
+			text-align:center;
+		}
+		#roomTitle{
+			font-family: Gaegu;
+			font-size: 0.8em;
+			border-radius: 5px;
+			border: 2px solid white;
+			padding: 5px 10px;
+		}
+		button{
+			font-family: Gaegu;
+			font-size: 0.8em;
+			transition: all .1s ease-in;
+			border-radius: 5px;
+			border: 2px solid white;
+			background-color: dodgerblue;
+			color: white;
+			padding: 5px 10px;
+		}
+		button:hover{
+			background-color: white;
+			color: dodgerblue;
+		}
+		#output{
+			font-family: Gaegu;
+			font-size: 0.8em;
+			padding: 5px;
+		}
+		#roomsContainer{
+			text-align: center;
+		}
+		.room{
+			font-family: Gaegu;
+			font-size: 1.5em;
+			border-radius: 10px;
+			border: 2px solid black;
+			padding: 20px;
+			margin:5px 10px;
+			width: 25%;
+			height: 8vh;
+			float:left;
+			overflow: hidden;
+		}
+		#playerCount{
+			font-family: Gaegu;
+			font-size: 1.5em;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		#canvas{
+			display:none;
+			cursor: url('cursor.png'), pointer;
+		}
+	</style>
+</head>
+<body>
+	<div id='home'>
+		<section id='header'>
+			<h1 id='title'>Connect Four</h1>
+			<input type='text' id='roomTitle' placeholder='New room'/>
+			<button id='roomButton'>Create Room</button><br>
+			<span id='output'></span>
+		</section>
+		<br>
+		<section id='roomsContainer'></section>
+		<div id='playerCount'></div>
+	</div>
+	<canvas id="canvas"></canvas>
+	<script src='client.js'></script>
+	<script src='game.js'></script>
+</body>
+</html>
